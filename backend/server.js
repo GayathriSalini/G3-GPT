@@ -16,6 +16,9 @@ console.log(response);  */
 import express from "express";
 import 'dotenv/config';
 import cors from "cors";
+import mongoose from "mongoose";
+import chatRoutes from "./routes/chat.js";
+
 
 const app = express();
 const PORT = 8000;
@@ -23,17 +26,30 @@ const PORT = 8000;
 app.use(express.json());
 app.use(cors());
 
+app.use("/api", chatRoutes);
+
 app.listen(PORT, () => {
-    console.log(`server running on ${PORT} (UPDATED VERSION 2.0)`);
+    console.log(`server running on ${PORT}`);
     console.log(`- Send POST requests to http://localhost:${PORT}/test`);
+    connectDB();
 });
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI)
+        console.log("connected to database")
+    } catch (err) {
+        console.log("connection error", err)
+    }
+}
+
 
 // Root route to prevent 404 on base URL
 app.get('/', (req, res) => {
     res.send("Server is running! Send a POST request to '/test' with a JSON body to get a joke.");
 });
 
-app.post('/test', async (req, res) => {
+/* app.post('/test', async (req, res) => {
 
     // console.log("Request Headers:", req.headers);
     // console.log("Request Body:", req.body);
@@ -76,11 +92,11 @@ app.post('/test', async (req, res) => {
             //console.log("AI Response:", data.choices[0].message.content);
             res.send(data.choices[0].message.content)
         }
-        /* res.send(data); */
+        // res.send(data);
     } catch (err) {
         console.error(err)
         res.status(500).send("Something went wrong");
     }
-})
+}) */
 
 
