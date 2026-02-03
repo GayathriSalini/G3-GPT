@@ -69,7 +69,6 @@
 .userInput input {
     background: transparent;
     border: none;
-
     flex-grow: 1;
     padding: 0.8rem;
     font-size: 1rem;
