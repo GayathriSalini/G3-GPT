@@ -98,3 +98,34 @@
     color: #8e8e8e;
     margin-top: 12px;
 }
+
+.settingOptions {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    width: 160px;
+    background-color: #323232;
+    padding: 0.3rem 0.5rem;
+    border-radius: 7px;
+    text-align: left;
+    z-index: 1000;
+    box-shadow: 0px 2px 9px rgba(0,0,1);
+    
+}
+
+.settingOptions i {
+    padding-right: 2rem;
+    font-size: 0.9rem;
+}
+
+.settingItem {
+    font-size: 0.9rem;
+    margin: 0.3rem 0rem;
+    padding: 0.5rem 0.2rem;
+}
+
+.settingItem:hover {
+     background-color: rgba(180, 180, 180, 0.1);
+     border-radius: 6px;
+}
+

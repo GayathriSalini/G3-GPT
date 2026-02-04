@@ -6,7 +6,7 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     scrollbar-width: thin;
     scrollbar-color: #555 transparent;
 }
@@ -27,12 +27,27 @@
 .userDiv {
     display: flex;
     justify-content: flex-end;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .g3gptDiv {
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.g3gptDiv p {
+    margin-bottom: 1.2rem;
+}
+
+.g3gptDiv ul,
+.g3gptDiv ol {
+    margin-bottom: 1.2rem;
+    padding-left: 1.5rem;
+}
+
+.g3gptDiv li {
+    margin-bottom: 0.6rem;
 }
 
 .userprompt {
@@ -42,3 +57,12 @@
 }
 
 .g3gptReply {}
+
+.hljs {
+    border-radius: 14px !important;
+}
+
+pre {
+    white-space: pre-wrap;
+
+}

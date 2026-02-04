@@ -32,8 +32,8 @@ const getOpenAIResponse = async (message) => {
 
         return "No response from AI";
     } catch (err) {
-        console.error(err);
-        throw new Error("Something went wrong");
+        console.error("AI Request Error:", err);
+        throw new Error(`AI Request Failed: ${err.message}`);
     }
 };
 

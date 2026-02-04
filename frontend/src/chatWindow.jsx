@@ -9,9 +9,12 @@ function ChatWindow() {
 
     const { prompt, setPrompt, reply, setReply, currThreadId, preChats, setPreviousChats, setNewChat } = useContext(MyContext);
     const [loading, setLoading] = useState(false);
+    
+    const [isOpen, setisOpen] = useState(false);
 
     const getReply = async () => {
         setLoading(true);
+        setNewChat(false);
         console.log("message", prompt, "threadId", currThreadId)
         const options = {
             method: "POST",
@@ -51,14 +54,27 @@ function ChatWindow() {
         setPrompt("");
     }, [reply])
 
+
+    const profileSettings = () => {
+        setisOpen(!isOpen);
+    }
+
     return (
         <div className="chatWindow">
             <div className="navbar">
                 <span>G3-GPT &nbsp; {/* <i className="fa-solid fa-arrow-down"></i> */}</span>
-                <div className="userIcondiv">
+                <div className="userIcondiv" onClick={profileSettings}>
                     <span className="userIcon">  <i className="fa-regular fa-user"></i> </span>
                 </div>
             </div>
+            {
+                isOpen && 
+                <div className="settingOptions">
+                     <div className="settingItem"><i className="fa-solid fa-arrow-up-right-from-square"></i>Upgrade Plan</div>
+                     <div className="settingItem"><i className="fa-solid fa-gear"></i>Settings</div>
+                     <div className="settingItem"><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</div>
+                </div>
+            }
             <Chat></Chat>
             <CircleLoader color="#ffff" loading={loading} ></CircleLoader>
             <div className="inputArea">

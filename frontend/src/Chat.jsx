@@ -11,7 +11,7 @@ function Chat() {
     const { newChat, preChats, reply } = useContext(MyContext);
     const [latestReply, setLatestReply] = useState("");
 
-    // Typing effect for the latest assistant reply
+
     useEffect(() => {
         if (!reply) return;
 
