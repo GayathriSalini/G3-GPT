@@ -32,9 +32,9 @@ const Login = () => {
             console.log("Login Response Data:", data);
             if (success) {
                 toast.success(message);
-                console.log("Login successful, navigating in 1s...");
+                console.log("Login successful, navigating to Chat...");
                 setTimeout(() => {
-                    navigate("/", { replace: true });
+                    navigate("/home", { replace: true });
                 }, 1000);
             } else {
                 console.warn("Login unsuccessful:", message);

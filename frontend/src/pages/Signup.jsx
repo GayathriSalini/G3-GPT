@@ -34,7 +34,7 @@ const Signup = () => {
                 toast.success(message);
                 console.log("Signup successful, redirecting to login...");
                 setTimeout(() => {
-                    navigate("/login");
+                    navigate("/");
                 }, 1000);
             } else {
                 toast.error(message);

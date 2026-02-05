@@ -69,7 +69,7 @@ function ChatWindow() {
 
     const logout = () => {
         removeCookie("token", { path: '/' });
-        navigate("/login");
+        navigate("/");
     }
 
     return (

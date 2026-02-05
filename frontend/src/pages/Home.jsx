@@ -27,7 +27,7 @@ const Home = () => {
                 const { status, user } = data;
                 if (!status) {
                     console.log("Session verification failed. Redirecting to login.");
-                    navigate("/login");
+                    navigate("/");
                 } else {
                     console.log(`Verified as: ${user}`);
                     setNewChat(true);
@@ -35,11 +35,11 @@ const Home = () => {
                     setReply("");
                     setPreviousChats([]);
                     setcurrThreadId(uuidv1());
-                    setVerifying(false); // Only stop verifying if success
+                    setVerifying(false);
                 }
             } catch (error) {
                 console.error("Verification error:", error);
-                navigate("/login");
+                navigate("/");
             }
         };
 

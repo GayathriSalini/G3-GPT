@@ -31,8 +31,8 @@ function App() {
     <div className="App">
       <MyContext.Provider value={providedValue}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <ToastContainer position="bottom-right" theme="dark" />
