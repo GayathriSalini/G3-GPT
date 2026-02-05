@@ -8,7 +8,9 @@ function Sidebar() {
 
     const getAllThreads = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/thread");
+            const response = await fetch("http://localhost:8000/api/thread", {
+                credentials: "include"
+            });
             const res = await response.json();
             const filterData = res.map(thread => ({ threadId: thread.threadId, title: thread.title }));
             // console.log(filterData);
@@ -34,7 +36,9 @@ function Sidebar() {
     const changeThread = async (newthreadId) => {
         setcurrThreadId(newthreadId);
         try {
-            const response = await fetch(`http://localhost:8000/api/thread/${newthreadId}`)
+            const response = await fetch(`http://localhost:8000/api/thread/${newthreadId}`, {
+                credentials: "include"
+            })
             const res = await response.json();
             console.log(res);
             setPreviousChats(res);
@@ -47,7 +51,10 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/thread/${threadId}`, { method: "DELETE" });
+            const response = await fetch(`http://localhost:8000/api/thread/${threadId}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
             const res = await response.json()
             console.log(res);
 

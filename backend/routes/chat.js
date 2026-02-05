@@ -1,29 +1,18 @@
 import express from "express";
 import Thread from "../models/Thread.js";
 import getOpenAIResponse from "../utils/openai.js";
+import { userVerification } from "../middleware/authmiddle.js";
 
 const router = express.Router();
 
-router.post("/test", async (req, res) => {
-    try {
-        const thread = new Thread({
-            threadId: "sssa211111",
-            title: "testing in route new test after return"
-        });
-        const response = await thread.save();
-        res.send(response)
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ err: "didnt add the data thread" })
-    }
+// Apply auth middleware to all chat routes
+router.use(userVerification);
 
-})
-
-//get all threads
+//get all threads for the logged-in user
 router.get("/thread", async (req, res) => {
     try {
-        const threads = await Thread.find({}).sort({ createdAt: -1 });
-        //most recent threds first 
+        const threads = await Thread.find({ userId: req.userId }).sort({ createdAt: -1 });
+        //most recent threads first 
         res.json(threads)
     } catch (err) {
         console.log(err);
@@ -31,30 +20,30 @@ router.get("/thread", async (req, res) => {
     }
 })
 
-//getting specific thread by id
+//getting specific thread by id (must belong to the user)
 router.get("/thread/:threadId", async (req, res) => {
     const { threadId } = req.params;
     try {
-        const thread = await Thread.findOne({ threadId });
+        const thread = await Thread.findOne({ threadId, userId: req.userId });
         if (!thread) {
-            return res.status(404).json({ err: "thread not found" });
+            return res.status(404).json({ err: "thread not found or access denied" });
         }
         res.json(thread.messages);
     } catch (err) {
         console.log(err);
-        res.status(500).json({ err: "could not load/fetch the sepcific thread" })
+        res.status(500).json({ err: "could not load/fetch the specific thread" })
     }
 })
 
 
-//delete the thread by id
+//delete the thread by id (must belong to the user)
 router.delete("/thread/:threadId", async (req, res) => {
     const { threadId } = req.params;
     try {
-        const deletedThread = await Thread.findOneAndDelete({ threadId });
+        const deletedThread = await Thread.findOneAndDelete({ threadId, userId: req.userId });
 
         if (!deletedThread) {
-            return res.status(404).json({ err: "thread not found" });
+            return res.status(404).json({ err: "thread not found or access denied" });
         }
 
         res.status(200).json({ success: "thread deleted successfully" })
@@ -73,11 +62,12 @@ router.post("/chat", async (req, res) => {
     }
 
     try {
-        let thread = await Thread.findOne({ threadId });
+        let thread = await Thread.findOne({ threadId, userId: req.userId });
         if (!thread) {
             thread = new Thread({
                 threadId,
-                title: message,
+                userId: req.userId, // Associate with current user
+                title: message.substring(0, 30), // Use first 30 chars as title
                 messages: [{ role: "user", content: message }]
             });
         } else {
@@ -95,7 +85,7 @@ router.post("/chat", async (req, res) => {
         const errorMessage = err.message || "Unknown error";
         res.status(500).json({
             error: "Something went wrong while processing your chat.",
-            details: errorMessage.includes("buffering timed out") ? "Database connection timeout. Please check your MongoDB connection and IP whitelist." : errorMessage
+            details: errorMessage
         });
     }
 })

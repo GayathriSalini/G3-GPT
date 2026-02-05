@@ -1,10 +1,13 @@
-import './App.css';
-import Sidebar from './Sidebar.jsx';
-import ChatWindow from './chatWindow.jsx';
-import { MyContext } from './Mycontext.jsx';
-
+import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
 import { v1 as uuidv1 } from "uuid";
+import { MyContext } from './Mycontext.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
+import './App.css';
 
 function App() {
   const [prompt, setPrompt] = useState("");
@@ -25,15 +28,17 @@ function App() {
   };
 
   return (
-
-    <div className="main">
+    <div className="App">
       <MyContext.Provider value={providedValue}>
-        <Sidebar />
-        <ChatWindow />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+        <ToastContainer position="bottom-right" theme="dark" />
       </MyContext.Provider>
     </div>
-
-  )
+  );
 }
 
-export default App
+export default App;

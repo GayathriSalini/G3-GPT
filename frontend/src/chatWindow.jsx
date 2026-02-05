@@ -4,13 +4,20 @@ import { MyContext } from "./Mycontext.jsx";
 import { useContext, useState, useEffect } from "react";
 
 import { CircleLoader, SyncLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function ChatWindow() {
 
+    const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+
+
     const { prompt, setPrompt, reply, setReply, currThreadId, preChats, setPreviousChats, setNewChat } = useContext(MyContext);
     const [loading, setLoading] = useState(false);
-    
+
     const [isOpen, setisOpen] = useState(false);
+
 
     const getReply = async () => {
         setLoading(true);
@@ -21,6 +28,7 @@ function ChatWindow() {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify({
                 message: prompt,
                 threadId: currThreadId
@@ -40,16 +48,16 @@ function ChatWindow() {
     //append new chats
     useEffect(() => {
         if (prompt && reply) {
-           setPreviousChats(preChats => (
-             [...preChats, {
-                role:"user",
-                content: prompt 
-             },{
-                role:"assistant",
-                content: reply
-             }]
-           ))
-          
+            setPreviousChats(preChats => (
+                [...preChats, {
+                    role: "user",
+                    content: prompt
+                }, {
+                    role: "assistant",
+                    content: reply
+                }]
+            ))
+
         }
         setPrompt("");
     }, [reply])
@@ -57,6 +65,11 @@ function ChatWindow() {
 
     const profileSettings = () => {
         setisOpen(!isOpen);
+    }
+
+    const logout = () => {
+        removeCookie("token", { path: '/' });
+        navigate("/login");
     }
 
     return (
@@ -68,11 +81,11 @@ function ChatWindow() {
                 </div>
             </div>
             {
-                isOpen && 
+                isOpen &&
                 <div className="settingOptions">
-                     <div className="settingItem"><i className="fa-solid fa-arrow-up-right-from-square"></i>Upgrade Plan</div>
-                     <div className="settingItem"><i className="fa-solid fa-gear"></i>Settings</div>
-                     <div className="settingItem"><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</div>
+                    <div className="settingItem"><i className="fa-solid fa-arrow-up-right-from-square"></i>Upgrade Plan</div>
+                    <div className="settingItem"><i className="fa-solid fa-gear"></i>Settings</div>
+                    <div onClick={logout} className="settingItem"><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</div>
                 </div>
             }
             <Chat></Chat>

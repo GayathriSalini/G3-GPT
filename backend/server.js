@@ -18,36 +18,24 @@ import 'dotenv/config';
 import cors from "cors";
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
-
+import cookieParser from "cookie-parser";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 const PORT = 8000;
 
+app.use(
+    cors({
+        origin: ["http://localhost:5173"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true
+    })
+);
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
 
 app.use("/api", chatRoutes);
-
-app.listen(PORT, () => {
-    console.log(`server running on ${PORT}`);
-    console.log(`- Send POST requests to http://localhost:${PORT}/test`);
-    connectDB();
-});
-
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI)
-        console.log("connected to database")
-    } catch (err) {
-        console.log("connection error", err)
-    }
-}
-
-
-// Root route to prevent 404 on base URL
-app.get('/', (req, res) => {
-    res.send("Server is running! Send a POST request to '/test' with a JSON body to get a joke.");
-});
+app.use("/", authRoutes);
 
 /* app.post('/test', async (req, res) => {
 
@@ -98,5 +86,20 @@ app.get('/', (req, res) => {
         res.status(500).send("Something went wrong");
     }
 }) */
+app.get('/', (req, res) => {
+    res.send("G3-GPT Auth Server is running!");
+});
 
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI)
+        console.log("connected to database")
+    } catch (err) {
+        console.log("connection error", err)
+    }
+}
 
+app.listen(PORT, () => {
+    console.log(`server running on ${PORT}`);
+    connectDB();
+});
