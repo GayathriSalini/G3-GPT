@@ -90,8 +90,7 @@ G3-GPT/
 ├── frontend/           # React application
 │   ├── src/
 │   │   ├── pages/      # Home, Login, Signup views
-│   │   ├── components/ # Sidebar, ChatWindow, etc.
-│   │   └── context/    # App global state
+│   │   └── ...         # Core components (Sidebar, Chat, etc.) and App logic
 │   └── public/         # Static assets
 └── README.md           # Project documentation
 ```
