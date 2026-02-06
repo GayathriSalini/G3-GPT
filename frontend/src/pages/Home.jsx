@@ -8,6 +8,7 @@ import { v1 as uuidv1 } from "uuid";
 import { SyncLoader } from "react-spinners";
 
 import axios from 'axios';
+import API_BASE_URL from '../api';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Home = () => {
             console.log("Verifying user session...");
             try {
                 const { data } = await axios.post(
-                    "http://localhost:8000/",
+                    `${API_BASE_URL}/`,
                     {},
                     { withCredentials: true }
                 );

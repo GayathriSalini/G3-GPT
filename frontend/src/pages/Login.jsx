@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import '../Auth.css';
+import API_BASE_URL from '../api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const { data } = await axios.post(
-                "http://localhost:8000/login",
+                `${API_BASE_URL}/login`,
                 { ...inputValue },
                 { withCredentials: true }
             );

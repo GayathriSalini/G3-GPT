@@ -22,11 +22,11 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(
     cors({
-        origin: ["http://localhost:5173"],
+        origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true
     })

@@ -6,6 +6,7 @@ import { useContext, useState, useEffect } from "react";
 import { CircleLoader, SyncLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import API_BASE_URL from "./api";
 
 function ChatWindow() {
 
@@ -35,7 +36,7 @@ function ChatWindow() {
             })
         };
         try {
-            const response = await fetch("http://localhost:8000/api/chat", options);
+            const response = await fetch(`${API_BASE_URL}/api/chat`, options);
             const res = await response.json();
             console.log(res);
             setReply(res.reply);
