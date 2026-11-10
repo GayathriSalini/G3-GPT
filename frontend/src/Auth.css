@@ -144,3 +144,5 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
 }
+.logo-container { flex-direction: column; align-items: center; gap: 10px; }
+.logo-container .auth-logo { font-size: 1.8rem; }

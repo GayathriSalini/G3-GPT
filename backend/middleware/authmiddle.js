@@ -14,6 +14,7 @@ export const userVerification = (req, res, next) => {
             const user = await User.findById(data.id);
             if (user) {
                 req.userId = user._id; // Attach ID for chat routes
+                req.username = user.username;
 
                 // If this is a direct call to verify (from frontend Home.jsx)
                 if (req.method === "POST" && req.path === "/") {

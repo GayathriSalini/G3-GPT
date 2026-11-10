@@ -129,3 +129,39 @@
      border-radius: 6px;
 }
 
+
+.navBrand { display: flex; align-items: center; gap: 14px; margin: 0.8rem 2rem; }
+.navbar .navBrand span { margin: 0; }
+.navbar .g3logo-text { margin: 0; font-size: 1.1rem; }
+.searchBadge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.75rem !important; font-weight: 500 !important;
+    color: #b4b4b4; background: transparent;
+    border: 1px solid #3a3a3a; padding: 3px 10px; border-radius: 999px;
+}
+
+.userInput { align-items: flex-end; border: 1px solid #3a3a3a; transition: border-color 0.2s, box-shadow 0.2s; }
+.userInput:focus-within { border-color: #5a5a5a; }
+.userInput textarea {
+    background: transparent; border: none; outline: none; resize: none;
+    flex-grow: 1; padding: 0.8rem; font-size: 1rem; font-family: inherit;
+    color: #ececec; line-height: 1.4; max-height: 160px; text-align: left;
+}
+#submit {
+    background: #ececec; color: #111;
+    border: none; margin-bottom: 6px; font-size: 1rem;
+}
+#submit:disabled { background: #3a3a3a; color: #777; cursor: default; }
+#submit.stopBtn { background: #ececec; color: #111; }
+
+.searchToggle {
+    display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+    margin: 0 0 8px 4px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+    font-size: 0.82rem; font-family: inherit;
+    background: transparent; color: #8e8e8e; border: 1px solid #3a3a3a;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.searchToggle:hover { background: #3a3a3a; }
+.searchToggle.on { background: #ececec; color: #111; border-color: #ececec; }
+.searchToggle i { color: inherit; padding: 0; font-size: 0.85rem; }
+.searchToggle.on i { color: #111; }

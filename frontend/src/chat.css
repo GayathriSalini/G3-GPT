@@ -66,3 +66,79 @@ pre {
     white-space: pre-wrap;
 
 }
+
+.agentStatus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #9a9a9a;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.agentStatus .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cfcfcf;
+    animation: g3pulse 1s infinite ease-in-out;
+}
+
+@keyframes g3pulse {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 1; }
+}
+
+.sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.8rem;
+}
+
+.sources a {
+    font-size: 0.78rem;
+    color: #cfcfcf;
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.sources a:hover {
+    background: #353535;
+}
+
+.sources a b {
+    color: #ececec;
+    margin-right: 4px;
+}
+
+.welcome {
+    flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.6rem; padding: 1rem; max-width: 800px;
+}
+.welcome h1 { font-size: 2rem; margin: 0.6rem 0 0; }
+.welcomeSub { color: #9a9a9a; margin: 0 0 1.2rem; }
+.suggestions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+.suggestions button {
+    display: flex; align-items: center; gap: 10px; text-align: left;
+    background: #2a2a2a; border: 1px solid #3a3a3a; color: #dcdcdc;
+    padding: 14px 16px; border-radius: 14px; cursor: pointer; font-size: 0.92rem;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.suggestions button i { color: #b4b4b4; width: 18px; }
+.suggestions button:hover { border-color: #5a5a5a; background: #303030; }
+@media (max-width: 640px) { .suggestions { grid-template-columns: 1fr; } }
+
+.userCol { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 85%; }
+.askedAt { font-size: 0.72rem; color: #7d7d7d; opacity: 0; transition: opacity 0.2s; }
+.userDiv:hover .askedAt { opacity: 1; }
+
+.botRow { display: flex; gap: 14px; align-items: flex-start; }
+.botRow > .g3logo { margin-top: 2px; }
+.botBody { flex: 1; min-width: 0; }
+.msgActions { margin-top: 0.4rem; }
+.iconBtn { background: transparent; border: none; color: #8e8e8e; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+.iconBtn:hover { background: #2f2f2f; color: #fff; }

@@ -13,3 +13,7 @@ body {
     background-color: #212121;
     color: #ececec;
 }
+/* ---- G3 logo ---- */
+.g3logo { display: inline-flex; align-items: center; gap: 10px; }
+.g3logo svg { flex-shrink: 0; }
+.g3logo-text { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.2px; color: #fff; }

@@ -1,3 +1,4 @@
+import Logo from '../Logo.jsx';
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -50,7 +51,7 @@ const Signup = () => {
         <div className="auth-container">
             <div className="auth-card">
                 <div className="logo-container">
-                    <span className="auth-logo">G3-GPT</span>
+                    <Logo size={56} /><span className="auth-logo">G3-GPT</span>
                 </div>
                 <div className="auth-header">
                     <h1>Create Account</h1>

@@ -9,6 +9,12 @@ G3-GPT is a full-stack AI chat application that provides a seamless interface fo
 - **AI Chat Interface**: Real-time interaction with GPT-4o-mini with typing animations.
 - **Markdown & Code Highlighting**: Full support for markdown rendering with syntax highlighting.
 
+- **Web-search agent**: one tool (`web_search`); the model decides when to search, cites sources `[1]`, and shows source chips.
+- **Streaming**: real token streaming (SSE) with live "Searching the web…" status.
+- **Memory**: full thread history with timestamps is sent every turn (so "what did I ask / when" works), plus a digest of your recent other chats.
+
+Optional backend `.env`: `TAVILY_API_KEY` (better search; falls back to keyless DuckDuckGo), `MODEL` (default `gpt-4o-mini`).
+
 ## 🛠️ Tech Stack
 
 ### Frontend

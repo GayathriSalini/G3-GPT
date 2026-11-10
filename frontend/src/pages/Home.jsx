@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { MyContext } from '../Mycontext.jsx';
 import { v1 as uuidv1 } from "uuid";
+import Logo from '../Logo.jsx';
 import { SyncLoader } from "react-spinners";
 
 import axios from 'axios';
@@ -59,8 +60,9 @@ const Home = () => {
                 flexDirection: 'column',
                 gap: '20px'
             }}>
-                <SyncLoader color="#fff" />
-                <p>Establishing secure connection...</p>
+                <Logo size={56} />
+                <SyncLoader color="#cfcfcf" size={8} />
+                <p>Loading your chats…</p>
             </div>
         );
     }
